@@ -82,5 +82,4 @@ _deps
 
 build/*
 
-GraphicsSDK/assimp-5.0.1/build/code/libassimp.so.5.0.0
-GraphicsSDK/assimp-5.0.1/build/code/libassimp.so.5
+GraphicsSDK/*
