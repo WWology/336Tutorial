@@ -83,4 +83,4 @@ _deps
 build/*
 
 GraphicsSDK/*
-GraphicsSDK/glew-2.1.0/include/GL/glew.hs
+GraphicsSDK/glew-2.1.0/include/GL/glew.h
