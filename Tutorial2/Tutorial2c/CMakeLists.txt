@@ -6,7 +6,7 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/ColorFS.frag
 	${CMAKE_CURRENT_BINARY_DIR} COPYONLY
 )
 
-add_library(Shader
+add_library(Shader2c
 	shader.h
 	shader.cpp
 )
@@ -15,7 +15,7 @@ add_executable(Tutorial2c Tutorial2c.cpp)
 
 target_link_libraries(Tutorial2c PUBLIC
 	GraphicsSDK
-	Shader
+	Shader2c
 )
 
 pvs_studio_add_target(TARGET Tutorial2c.analyze ALL

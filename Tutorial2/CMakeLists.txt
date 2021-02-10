@@ -2,5 +2,3 @@ add_subdirectory(Tutorial2a)
 add_subdirectory(Tutorial2b)
 add_subdirectory(Tutorial2c)
 add_subdirectory(Tutorial2d)
-
-add_subdirectory(XcodeProjects)

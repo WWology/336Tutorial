@@ -6,7 +6,7 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/SimpleFS.frag
 	${CMAKE_CURRENT_BINARY_DIR} COPYONLY
 )
 
-add_library(Shader
+add_library(Shader2b
 	shader.cpp
 	shader.h
 )
@@ -15,7 +15,7 @@ add_executable(Tutorial2b Tutorial2b.cpp)
 
 target_link_libraries(Tutorial2b PUBLIC
 	GraphicsSDK
-	Shader
+	Shader2b
 )
 
 pvs_studio_add_target(TARGET Tutorial2b.analyze ALL
