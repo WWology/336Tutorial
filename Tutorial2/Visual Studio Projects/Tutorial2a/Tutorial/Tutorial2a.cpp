@@ -55,7 +55,7 @@ static void render_scene()
 static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
 	// quit if the ESCAPE key was press
-	if(key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) 
+	if(key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 	{
 		// set flag to close the window
 		glfwSetWindowShouldClose(window, GL_TRUE);
@@ -76,15 +76,15 @@ int main(void)
     glfwSetErrorCallback(error_callback);	// set error callback function
 
 	// initialise GLFW
-	if(!glfwInit()) 
+	if(!glfwInit())
 	{
 		// if failed to initialise GLFW
 		exit(EXIT_FAILURE);
 	}
 
 	// minimum OpenGL version 3.3
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
@@ -102,7 +102,7 @@ int main(void)
 	glfwSwapInterval(1);			// swap buffer interval
 
 	// initialise GLEW
-	if(glewInit() != GLEW_OK) 
+	if(glewInit() != GLEW_OK)
 	{
 		// if failed to initialise GLEW
 		cerr << "GLEW initialisation failed" << endl;
@@ -134,4 +134,3 @@ int main(void)
 
     exit(EXIT_SUCCESS);
 }
-

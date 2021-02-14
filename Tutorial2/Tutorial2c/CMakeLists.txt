@@ -20,7 +20,8 @@ target_link_libraries(Tutorial2c PUBLIC
 
 pvs_studio_add_target(TARGET Tutorial2c.analyze ALL
 	OUTPUT FORMAT errorfile
-	ANALYZE Tutorial2c
+	ANALYZE Tutorial2c Shader2c
 	MODE GA:1,2 OP
 	LOG Tutorial2c.err
+	HIDE_HELP
 )

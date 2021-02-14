@@ -95,7 +95,7 @@ Vertex g_vertices[] = {
 	0.5f, -0.5f, -0.5f,	// position
 	1.0f, 0.0f, 0.0f,	// normal
 	1.0f, 0.0f,			// texture coordinate
-	
+
 	// Back: triangle 5
 	// vertex 1
 	0.5f, -0.5f, -0.5f,	// position
@@ -413,8 +413,8 @@ int main(void)
 	}
 
 	// minimum OpenGL version 3.3
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
@@ -486,4 +486,3 @@ int main(void)
 
 	exit(EXIT_SUCCESS);
 }
-

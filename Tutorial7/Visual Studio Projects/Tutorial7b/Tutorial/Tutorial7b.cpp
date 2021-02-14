@@ -114,7 +114,7 @@ static void init(GLFWwindow* window)
 static void update_scene()
 {
 	// update model matrix
-	g_modelMatrix[1] = glm::translate(g_translation) 
+	g_modelMatrix[1] = glm::translate(g_translation)
 		* glm::rotate(glm::radians(g_rotation), vec3(0.0f, 0.0f, 1.0f));
 }
 
@@ -217,8 +217,8 @@ int main(void)
 	}
 
 	// minimum OpenGL version 3.3
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
@@ -317,4 +317,3 @@ int main(void)
 
 	exit(EXIT_SUCCESS);
 }
-

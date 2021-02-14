@@ -53,7 +53,7 @@ float g_rotateAngleY = 0.0f;
 // simple function to load a mesh
 bool load_mesh(const char* fileName, Mesh* mesh)
 {
-	// load file with assimp 
+	// load file with assimp
 	const aiScene* pScene = aiImportFile(fileName, aiProcess_Triangulate);
 
 	// check whether scene was loaded
@@ -225,8 +225,8 @@ int main(void)
 	}
 
 	// minimum OpenGL version 3.3
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
@@ -306,7 +306,7 @@ int main(void)
 		if (elapsedTime >= 1.0f)	// if time since last update >= to 1 second
 		{
 			frameTime = 1.0f / frameCount;	// calculate frame time
-			
+
 			string str = "FPS = " + to_string(frameCount) + "; FT = " + to_string(frameTime);
 
 			glfwSetWindowTitle(window, str.c_str());	// update window title
@@ -334,4 +334,3 @@ int main(void)
 
 	exit(EXIT_SUCCESS);
 }
-

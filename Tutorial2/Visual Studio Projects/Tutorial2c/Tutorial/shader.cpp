@@ -1,30 +1,30 @@
-#include <iostream>
 #include <fstream>
+#include <iostream>
 #include <string>
 using namespace std;
 
-#include <GLEW/glew.h>	// include GLEW
+#include <GLEW/glew.h> // include GLEW
 
 #include "shader.h"
 
 // function to load shaders
 GLuint loadShaders(const string vertexShaderFile, const string fragmentShaderFile)
 {
-	GLint status;	// for checking compile and linking status
+	GLint status; // for checking compile and linking status
 
 	// load vertex shader code from file
-	string vertexShaderCode;	// to store shader code
-	ifstream vertexShaderStream(vertexShaderFile, ios::in);	// open file stream
+	string vertexShaderCode;								// to store shader code
+	ifstream vertexShaderStream(vertexShaderFile, ios::in); // open file stream
 
 	// check whether file stream was successfully opened
-	if(vertexShaderStream.is_open())
+	if (vertexShaderStream.is_open())
 	{
 		// read from stream line by line and append it to shader code
 		string line = "";
-		while(getline(vertexShaderStream, line))
+		while (getline(vertexShaderStream, line))
 			vertexShaderCode += line + "\n";
 
-		vertexShaderStream.close();		// no longer need file stream
+		vertexShaderStream.close(); // no longer need file stream
 	}
 	else
 	{
@@ -34,18 +34,18 @@ GLuint loadShaders(const string vertexShaderFile, const string fragmentShaderFil
 	}
 
 	// load fragment shader code from file
-	string fragmentShaderCode;	// to store shader code
-	ifstream fragmentShaderStream(fragmentShaderFile, ios::in);	// open file stream
+	string fragmentShaderCode;									// to store shader code
+	ifstream fragmentShaderStream(fragmentShaderFile, ios::in); // open file stream
 
 	// check whether file stream was successfully opened
-	if(fragmentShaderStream.is_open())
+	if (fragmentShaderStream.is_open())
 	{
 		// read from stream line by line and append it to shader code
 		string line = "";
-		while(getline(fragmentShaderStream, line))
+		while (getline(fragmentShaderStream, line))
 			fragmentShaderCode += line + "\n";
 
-		fragmentShaderStream.close();	// no longer need file stream
+		fragmentShaderStream.close(); // no longer need file stream
 	}
 	else
 	{
@@ -71,10 +71,10 @@ GLuint loadShaders(const string vertexShaderFile, const string fragmentShaderFil
 	status = GL_FALSE;
 	glGetShaderiv(vertexShaderID, GL_COMPILE_STATUS, &status);
 
-	if(status == GL_FALSE)
+	if (status == GL_FALSE)
 	{
 		// output error message
-		cout << "Failed to compile vertex shader - " << vertexShaderFile  << endl;
+		cout << "Failed to compile vertex shader - " << vertexShaderFile << endl;
 
 		// output error information
 		int infoLogLength;
@@ -94,7 +94,7 @@ GLuint loadShaders(const string vertexShaderFile, const string fragmentShaderFil
 	status = GL_FALSE;
 	glGetShaderiv(fragmentShaderID, GL_COMPILE_STATUS, &status);
 
-	if(status == GL_FALSE)
+	if (status == GL_FALSE)
 	{
 		// output error message
 		cout << "Failed to compile fragment shader - " << fragmentShaderFile << endl;
@@ -128,7 +128,7 @@ GLuint loadShaders(const string vertexShaderFile, const string fragmentShaderFil
 	status = GL_FALSE;
 	glGetProgramiv(programID, GL_LINK_STATUS, &status);
 
-	if(status == GL_FALSE)
+	if (status == GL_FALSE)
 	{
 		// output error message
 		cout << "Failed to link program object." << endl;

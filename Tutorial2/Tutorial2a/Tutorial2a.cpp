@@ -8,8 +8,14 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
+// GLfloat g_vertexPos[] = {
+// 	0.0f, 0.0f, 0.0f // (X, Y, Z)
+// };
+
 GLfloat g_vertexPos[] = {
-	0.0f, 0.0f, 0.0f // (X, Y, Z)
+	-1.0f, -1.0f, 0.0f, // vertex 1 (x, y, z) coordinate
+	1.0f, -1.0f, 0.0f,	// vertex 2 (x, y, z) coordinate
+	0.0f, 1.0f, 0.0f,	// vertex 3 (x, y, z) coordinate
 };
 
 GLuint g_VBO = 0; // Vertex Buffer object identifier
@@ -38,7 +44,8 @@ static void render_scene()
 
 	glBindBuffer(GL_ARRAY_BUFFER, g_VAO);
 
-	glDrawArrays(GL_POINTS, 0, 1);
+	// glDrawArrays(GL_POINTS, 0, 1);
+	glDrawArrays(GL_TRIANGLES, 0, 3);
 
 	glFlush();
 }
@@ -69,8 +76,8 @@ int main(void)
 		exit(EXIT_FAILURE);
 	}
 
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 

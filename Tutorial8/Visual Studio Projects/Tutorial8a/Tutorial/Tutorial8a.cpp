@@ -253,8 +253,8 @@ int main(void)
 	}
 
 	// minimum OpenGL version 3.3
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
@@ -373,7 +373,7 @@ int main(void)
 
 bool load_mesh(const char* fileName, Mesh* mesh)
 {
-	// load file with assimp 
+	// load file with assimp
 	const aiScene* pScene = aiImportFile(fileName, aiProcess_Triangulate
 		| aiProcess_GenSmoothNormals | aiProcess_JoinIdenticalVertices);
 

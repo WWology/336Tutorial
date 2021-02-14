@@ -92,7 +92,7 @@ static void init(GLFWwindow* window)
 	g_MVP_Index = glGetUniformLocation(g_shaderProgramID, "uModelViewProjectionMatrix");
 
 	// initialise model matrix to the identity matrix
-	g_modelMatrix = glm::mat4(1.0f);	
+	g_modelMatrix = glm::mat4(1.0f);
 
 	// initialise the view matrix
 	g_viewMatrix = glm::lookAt(glm::vec3(0.0f, 0.0f, 4.0f), glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 1.0f, 0.0f));
@@ -104,7 +104,7 @@ static void init(GLFWwindow* window)
 
 	// initialise the projection matrix
 	g_projectionMatrix = glm::perspective(glm::radians(45.0f), aspectRatio, 0.1f, 100.0f);
-	
+
 	// generate identifier for VBO and copy data to GPU
 	glGenBuffers(1, &g_VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, g_VBO);
@@ -186,7 +186,7 @@ static void render_scene()
 {
 	glClear(GL_COLOR_BUFFER_BIT);	// clear colour buffer
 	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	// clear colour buffer and depth buffer
-    
+
     // set the viewport transformation
     glViewport(0, 0, g_windowWidth, g_windowHeight);
     //glViewport(100, 100, g_windowWidth - 200, g_windowHeight - 200);
@@ -243,8 +243,8 @@ int main(void)
 	}
 
 	// minimum OpenGL version 3.3
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
@@ -301,4 +301,3 @@ int main(void)
 
 	exit(EXIT_SUCCESS);
 }
-

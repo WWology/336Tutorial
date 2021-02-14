@@ -1,26 +1,26 @@
-#include <cstdio>		// for C++ i/o
+#include <cstddef>
+#include <cstdio> // for C++ i/o
 #include <iostream>
 #include <string>
-#include <cstddef>
-using namespace std;	// to avoid having to use std::
+using namespace std; // to avoid having to use std::
 
 #include <GLEW/glew.h>	// include GLEW
-#include <GLFW/glfw3.h>	// include GLFW (which includes the OpenGL header)
+#include <GLFW/glfw3.h> // include GLFW (which includes the OpenGL header)
 #include <glm/glm.hpp>	// include GLM (ideally should only use the GLM headers that are actually used)
 #include <glm/gtx/transform.hpp>
-using namespace glm;	// to avoid having to use glm::
+using namespace glm; // to avoid having to use glm::
 
 #include <AntTweakBar.h>
 #include <assimp/cimport.h>
-#include <assimp/scene.h>
 #include <assimp/postprocess.h>
+#include <assimp/scene.h>
 
-#include "shader.h"
-#include "bmpfuncs.h"
 #include "Camera.h"
+#include "bmpfuncs.h"
+#include "shader.h"
 
-#define MOVEMENT_SENSITIVITY 3.0f		// camera movement sensitivity
-#define ROTATION_SENSITIVITY 0.3f		// camera rotation sensitivity
+#define MOVEMENT_SENSITIVITY 3.0f // camera movement sensitivity
+#define ROTATION_SENSITIVITY 0.3f // camera rotation sensitivity
 
 // struct for vertex attributes
 typedef struct Vertex
@@ -32,10 +32,10 @@ typedef struct Vertex
 // struct for mesh properties
 typedef struct Mesh
 {
-	Vertex* pMeshVertices;		// pointer to mesh vertices
-	GLint numberOfVertices;		// number of vertices in the mesh
-	GLint* pMeshIndices;		// pointer to mesh indices
-	GLint numberOfFaces;		// number of faces in the mesh
+	Vertex* pMeshVertices;	// pointer to mesh vertices
+	GLint numberOfVertices; // number of vertices in the mesh
+	GLint* pMeshIndices;	// pointer to mesh indices
+	GLint numberOfFaces;	// number of faces in the mesh
 } Mesh;
 
 // light and material structs
@@ -56,12 +56,12 @@ typedef struct Material
 } Material;
 
 // Global variables
-Mesh g_mesh;					// mesh
+Mesh g_mesh; // mesh
 
-GLuint g_IBO = 0;				// index buffer object identifier
-GLuint g_VBO = 0;				// vertex buffer object identifier
-GLuint g_VAO = 0;				// vertex array object identifier
-GLuint g_shaderProgramID = 0;	// shader program identifier
+GLuint g_IBO = 0;			  // index buffer object identifier
+GLuint g_VBO = 0;			  // vertex buffer object identifier
+GLuint g_VAO = 0;			  // vertex array object identifier
+GLuint g_shaderProgramID = 0; // shader program identifier
 
 // locations in shader
 GLuint g_MVP_Index = 0;
@@ -77,20 +77,28 @@ GLuint g_materialDiffuseIndex = 0;
 GLuint g_materialSpecularIndex = 0;
 GLuint g_materialShininessIndex = 0;
 
-glm::mat4 g_modelMatrix;		// object's model matrix
+glm::mat4 g_modelMatrix; // object's model matrix
 float g_rotateAngleX = 90.0f;
 float g_rotateAngleZ = 0.0f;
 
 Light g_light;				// light properties
-Material g_material;			// material properties
-bool g_directional = false;		// directional light source on or off
+Material g_material;		// material properties
+bool g_directional = false; // directional light source on or off
 
-enum CUBE_FACE { FRONT, BACK, LEFT, RIGHT, TOP, BOTTOM };
+enum CUBE_FACE
+{
+	FRONT,
+	BACK,
+	LEFT,
+	RIGHT,
+	TOP,
+	BOTTOM
+};
 
-unsigned char* g_texImage[6];   //image data
-GLuint g_textureID;				//texture id
+unsigned char* g_texImage[6]; //image data
+GLuint g_textureID;			  //texture id
 
-GLuint g_windowWidth = 800;		// window dimensions
+GLuint g_windowWidth = 800; // window dimensions
 GLuint g_windowHeight = 600;
 
 float g_frameTime = 0.0f;
@@ -102,10 +110,10 @@ bool load_mesh(const char* fileName, Mesh* mesh);
 
 static void init(GLFWwindow* window)
 {
-	glEnable(GL_DEPTH_TEST);	// enable depth buffer test
-								// read the image data
-	GLint imageWidth;			//image width info
-	GLint imageHeight;			//image height info
+	glEnable(GL_DEPTH_TEST); // enable depth buffer test
+							 // read the image data
+	GLint imageWidth;		 //image width info
+	GLint imageHeight;		 //image height info
 
 	g_texImage[FRONT] = readBitmapRGBImage("images/cm_front.bmp", &imageWidth, &imageHeight);
 	g_texImage[BACK] = readBitmapRGBImage("images/cm_back.bmp", &imageWidth, &imageHeight);
@@ -114,7 +122,7 @@ static void init(GLFWwindow* window)
 	g_texImage[TOP] = readBitmapRGBImage("images/cm_top.bmp", &imageWidth, &imageHeight);
 	g_texImage[BOTTOM] = readBitmapRGBImage("images/cm_bottom.bmp", &imageWidth, &imageHeight);
 
-	glGenTextures(1, &g_textureID);                  // generate texture
+	glGenTextures(1, &g_textureID); // generate texture
 
 	glBindTexture(GL_TEXTURE_CUBE_MAP, g_textureID);
 
@@ -184,7 +192,7 @@ static void init(GLFWwindow* window)
 	// generate identifier for VBOs and copy data to GPU
 	glGenBuffers(1, &g_VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, g_VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex)*g_mesh.numberOfVertices, g_mesh.pMeshVertices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * g_mesh.numberOfVertices, g_mesh.pMeshVertices, GL_STATIC_DRAW);
 
 	// generate identifier for IBO and copy data to GPU
 	glGenBuffers(1, &g_IBO);
@@ -201,7 +209,7 @@ static void init(GLFWwindow* window)
 	glVertexAttribPointer(positionIndex, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), reinterpret_cast<void*>(offsetof(Vertex, position)));
 	glVertexAttribPointer(normalIndex, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), reinterpret_cast<void*>(offsetof(Vertex, normal)));
 
-	glEnableVertexAttribArray(positionIndex);	// enable vertex attributes
+	glEnableVertexAttribArray(positionIndex); // enable vertex attributes
 	glEnableVertexAttribArray(normalIndex);
 }
 
@@ -222,21 +230,20 @@ static void update_scene(GLFWwindow* window, float frameTime)
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 		strafeRight += 1 * MOVEMENT_SENSITIVITY * frameTime;
 
-	g_camera.update(moveForward, strafeRight);	// update camera
+	g_camera.update(moveForward, strafeRight); // update camera
 
 	// update model matrix
-	g_modelMatrix = glm::rotate(glm::radians(g_rotateAngleX), glm::vec3(1.0f, 0.0f, 0.0f))
-		* glm::rotate(glm::radians(g_rotateAngleZ), glm::vec3(0.0f, 0.0f, 1.0f));
+	g_modelMatrix = glm::rotate(glm::radians(g_rotateAngleX), glm::vec3(1.0f, 0.0f, 0.0f)) * glm::rotate(glm::radians(g_rotateAngleZ), glm::vec3(0.0f, 0.0f, 1.0f));
 }
 
 // function used to render the scene
 static void render_scene()
 {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	// clear colour buffer and depth buffer
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear colour buffer and depth buffer
 
-	glUseProgram(g_shaderProgramID);	// use the shaders associated with the shader program
+	glUseProgram(g_shaderProgramID); // use the shaders associated with the shader program
 
-	glBindVertexArray(g_VAO);		// make VAO active
+	glBindVertexArray(g_VAO); // make VAO active
 
 	// set uniform shader variables
 	glm::mat4 MVP = g_camera.getProjectionMatrix() * g_camera.getViewMatrix() * g_modelMatrix;
@@ -261,9 +268,9 @@ static void render_scene()
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, g_textureID);
 
-	glDrawElements(GL_TRIANGLES, g_mesh.numberOfFaces * 3, GL_UNSIGNED_INT, 0);	// display the vertices based on their indices and primitive type
+	glDrawElements(GL_TRIANGLES, g_mesh.numberOfFaces * 3, GL_UNSIGNED_INT, 0); // display the vertices based on their indices and primitive type
 
-	glFlush();	// flush the pipeline
+	glFlush(); // flush the pipeline
 }
 
 // key press or release callback function
@@ -317,7 +324,7 @@ static void mouse_button_callback(GLFWwindow* window, int button, int action, in
 		// use mouse to move camera, hence use disable cursor mode
 		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
-		g_centreCursor = true;	// mouse cursor position is centred
+		g_centreCursor = true; // mouse cursor position is centred
 		g_moveCamera = true;
 	}
 	else if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_RELEASE)
@@ -332,19 +339,19 @@ static void mouse_button_callback(GLFWwindow* window, int button, int action, in
 // error callback function
 static void error_callback(int error, const char* description)
 {
-	cerr << description << endl;	// output error description
+	cerr << description << endl; // output error description
 }
 
 int main(void)
 {
-	GLFWwindow* window = NULL;	// pointer to a GLFW window handle
-	TwBar *TweakBar;			// pointer to a tweak bar
-	double lastUpdateTime = glfwGetTime();	// last update time
-	double elapsedTime = lastUpdateTime;	// time elapsed since last update
-	int frameCount = 0;						// number of frames since last update
-	int FPS = 0;							// frames per second
+	GLFWwindow* window = NULL;			   // pointer to a GLFW window handle
+	TwBar* TweakBar;					   // pointer to a tweak bar
+	double lastUpdateTime = glfwGetTime(); // last update time
+	double elapsedTime = lastUpdateTime;   // time elapsed since last update
+	int frameCount = 0;					   // number of frames since last update
+	int FPS = 0;						   // frames per second
 
-	glfwSetErrorCallback(error_callback);	// set error callback function
+	glfwSetErrorCallback(error_callback); // set error callback function
 
 	// initialise GLFW
 	if (!glfwInit())
@@ -354,8 +361,8 @@ int main(void)
 	}
 
 	// minimum OpenGL version 3.3
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
@@ -369,7 +376,7 @@ int main(void)
 		exit(EXIT_FAILURE);
 	}
 
-	glfwMakeContextCurrent(window);	// set window context as the current context
+	glfwMakeContextCurrent(window); // set window context as the current context
 	glfwSwapInterval(1);			// swap buffer interval
 
 	// initialise GLEW
@@ -390,8 +397,8 @@ int main(void)
 
 	// give tweak bar the size of graphics window
 	TwWindowSize(g_windowWidth, g_windowHeight);
-	TwDefine(" TW_HELP visible=false ");	// disable help menu
-	TwDefine(" GLOBAL fontsize=3 ");		// set large font size
+	TwDefine(" TW_HELP visible=false "); // disable help menu
+	TwDefine(" GLOBAL fontsize=3 ");	 // set large font size
 
 	// create a tweak bar
 	TweakBar = TwNewBar("Main");
@@ -412,28 +419,28 @@ int main(void)
 	// the rendering loop
 	while (!glfwWindowShouldClose(window))
 	{
-		update_scene(window, g_frameTime);		// update the scene
-		render_scene();		// render the scene
+		update_scene(window, g_frameTime); // update the scene
+		render_scene();					   // render the scene
 
-		TwDraw();			// draw tweak bar(s)
+		TwDraw(); // draw tweak bar(s)
 
-		glfwSwapBuffers(window);	// swap buffers
-		glfwPollEvents();			// poll for events
+		glfwSwapBuffers(window); // swap buffers
+		glfwPollEvents();		 // poll for events
 
 		frameCount++;
-		elapsedTime = glfwGetTime() - lastUpdateTime;	// current time - last update time
+		elapsedTime = glfwGetTime() - lastUpdateTime; // current time - last update time
 
-		if (elapsedTime >= 1.0f)	// if time since last update >= to 1 second
+		if (elapsedTime >= 1.0f) // if time since last update >= to 1 second
 		{
-			g_frameTime = 1.0f / frameCount;	// calculate frame time
+			g_frameTime = 1.0f / frameCount; // calculate frame time
 
 			string str = "FPS = " + to_string(frameCount) + "; FT = " + to_string(g_frameTime);
 
-			glfwSetWindowTitle(window, str.c_str());	// update window title
+			glfwSetWindowTitle(window, str.c_str()); // update window title
 
 			FPS = frameCount;
-			frameCount = 0;					// reset frame count
-			lastUpdateTime += elapsedTime;	// update last update time
+			frameCount = 0;				   // reset frame count
+			lastUpdateTime += elapsedTime; // update last update time
 		}
 	}
 
@@ -467,9 +474,8 @@ int main(void)
 
 bool load_mesh(const char* fileName, Mesh* mesh)
 {
-	// load file with assimp 
-	const aiScene* pScene = aiImportFile(fileName, aiProcess_Triangulate
-		| aiProcess_GenSmoothNormals | aiProcess_JoinIdenticalVertices);
+	// load file with assimp
+	const aiScene* pScene = aiImportFile(fileName, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_JoinIdenticalVertices);
 
 	// check whether scene was loaded
 	if (!pScene)

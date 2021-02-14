@@ -9,4 +9,5 @@ pvs_studio_add_target(TARGET Tutorial1.analyze ALL
 	ANALYZE Tutorial1
 	MODE GA:1,2 OP
 	LOG Tutorial1.err
+	HIDE_HELP
 )
