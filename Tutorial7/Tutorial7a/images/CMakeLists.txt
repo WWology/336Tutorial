@@ -1,0 +1,23 @@
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cm_back.bmp
+	${CMAKE_CURRENT_BINARY_DIR} COPYONLY
+)
+
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cm_bottom.bmp
+	${CMAKE_CURRENT_BINARY_DIR} COPYONLY
+)
+
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cm_front.bmp
+	${CMAKE_CURRENT_BINARY_DIR} COPYONLY
+)
+
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cm_left.bmp
+	${CMAKE_CURRENT_BINARY_DIR} COPYONLY
+)
+
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cm_right.bmp
+	${CMAKE_CURRENT_BINARY_DIR} COPYONLY
+)
+
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cm_top.bmp
+	${CMAKE_CURRENT_BINARY_DIR} COPYONLY
+)

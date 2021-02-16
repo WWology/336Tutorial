@@ -24,9 +24,10 @@ GLuint loadShaders(const std::string& vertexShaderFile, const std::string& fragm
 	{
 		// read from stream line by line and append it to shader code
 		std::string line = "";
-		while (getline(vertexShaderStream, line))
+		while (std::getline(vertexShaderStream, line))
+		{
 			vertexShaderCode += line + "\n";
-
+		}
 		vertexShaderStream.close(); // no longer need file stream
 	}
 	else
@@ -45,9 +46,10 @@ GLuint loadShaders(const std::string& vertexShaderFile, const std::string& fragm
 	{
 		// read from stream line by line and append it to shader code
 		std::string line = "";
-		while (getline(fragmentShaderStream, line))
+		while (std::getline(fragmentShaderStream, line))
+		{
 			fragmentShaderCode += line + "\n";
-
+		}
 		fragmentShaderStream.close(); // no longer need file stream
 	}
 	else

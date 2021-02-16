@@ -4,6 +4,7 @@ project(336Tutorial VERSION 0.1.0)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 cmake_policy(SET CMP0072 NEW)
+cmake_policy(SET CMP0079 NEW)
 
 add_compile_options(-Wall -Wextra -Wshadow -Wnon-virtual-dtor -Wpedantic -lpthread)
 SET(CMAKE_EXE_LINKER_FLAGS   "-L/usr/local/lib")
@@ -16,7 +17,6 @@ find_package(OpenGL REQUIRED)
 
 set(GLEW_USE_STATIC_LIBS ON)
 find_package(GLEW REQUIRED)
-
 
 find_package(glfw3 3.3 REQUIRED)
 
@@ -36,18 +36,13 @@ find_library(AntTweakBar
 	REQUIRED
 )
 
-find_library(assimp
-	libassimp.so
-	NAMES assimp ASSIMP
-	DOC "Assimp Library"
-	REQUIRED
-)
+find_package(assimp REQUIRED)
 
 include_directories(
-	# GraphicsSDK/glew-2.1.0/include/GL/
-	GraphicsSDK/glfw-3.3.2/include/GLFW/
+	${OPENGL_INCLUDE_DIR}
+	${GLEW_INCLUDE_DIR}
+	${assimp_INCLUDE_DIR}
 	GraphicsSDK/glm/
-	GraphicsSDK/assimp-5.0.1/include/assimp/
 	GraphicsSDK/AntTweakBar/include/
 )
 
@@ -55,12 +50,11 @@ add_library(GraphicsSDK INTERFACE)
 
 target_link_libraries(GraphicsSDK INTERFACE
 	OpenGL::GL
-	# ${glfw3}
-	glfw
 	GLEW::glew_s
+	glfw
 	${glm}
 	${AntTweakBar}
-	${assimp}
+	assimp
 )
 
 add_subdirectory(Tutorial1)

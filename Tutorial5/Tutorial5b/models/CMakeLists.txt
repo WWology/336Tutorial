@@ -1,0 +1,3 @@
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/sphere.obj
+	${CMAKE_CURRENT_BINARY_DIR} COPYONLY
+)

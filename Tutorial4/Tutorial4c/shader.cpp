@@ -11,7 +11,7 @@
 #include "shader.h"
 
 // function to load shaders
-GLuint loadShaders(const std::string vertexShaderFile, const std::string fragmentShaderFile)
+GLuint loadShaders(const std::string& vertexShaderFile, const std::string& fragmentShaderFile)
 {
 	GLint status; // for checking compile and linking status
 

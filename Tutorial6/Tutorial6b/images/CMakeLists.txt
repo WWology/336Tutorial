@@ -1,0 +1,7 @@
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/check.bmp
+	${CMAKE_CURRENT_BINARY_DIR} COPYONLY
+)
+
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/smile.bmp
+	${CMAKE_CURRENT_BINARY_DIR} COPYONLY
+)

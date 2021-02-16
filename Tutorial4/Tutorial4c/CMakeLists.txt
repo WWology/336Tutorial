@@ -1,3 +1,5 @@
+add_subdirectory(models)
+
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/MVP_VS.vert
 	${CMAKE_CURRENT_BINARY_DIR} COPYONLY
 )

@@ -1,0 +1,4 @@
+add_subdirectory(Tutorial5a)
+add_subdirectory(Tutorial5b)
+add_subdirectory(Tutorial5c)
+add_subdirectory(Tutorial5d)

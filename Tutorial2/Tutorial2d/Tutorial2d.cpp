@@ -26,21 +26,21 @@ Vertex g_vertices[] = {
 	1.0f, 0.0f, 0.0f,	// colour
 						//vertex 2
 	-0.5f, -0.5f, 0.0f, // position
-	1.0f, 0.0f, 0.0f,	// colour
+	1.0f, 0.5f, 0.0f,	// colour
 						// vertex 3
 	0.5f, 0.5f, 0.0f,	// position
-	1.0f, 0.0f, 0.0f,	// colour
+	1.0f, 0.0f, 0.5f,	// colour
 
 	// triangle 2
 	// vertex 1
 	0.5f, 0.5f, 0.0f,	// position
-	0.0f, 1.0f, 0.0f,	// colour
+	0.5f, 1.0f, 0.5f,	// colour
 						// vertex 2
 	-0.5f, -0.5f, 0.0f, // position
-	0.0f, 1.0f, 0.0f,	// colour
+	0.2f, 1.0f, 0.7f,	// colour
 						// vertex 3
 	0.5f, -0.5f, 0.0f,	// position
-	0.0f, 1.0f, 0.0f,	// colour
+	0.7f, 1.0f, 0.2f,	// colour
 };
 
 GLuint g_VBO = 0;			  // vertex buffer object identifier
